@@ -6,14 +6,14 @@ set(C_STANDARD 99)
 option(LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE "Is FreeRTOS in a subdir of the include path?" OFF)
 option(LIBOS_FREERTOS_TARGET_NAME "What is the CMake Target name of FreeRTOS to also receive those header files." "freertos_kernel")
 
-if(NOT libOS-api) # Prevent multiple instances if other libraries already provide the libos library
+if(NOT TARGET libOS-api) # Prevent multiple instances if other libraries already provide the libos library
   include(FetchContent)
   FetchContent_Declare(
-    libOS-api
+    libOS
     GIT_REPOSITORY git@github.com:embDevLibs/libos.git
     GIT_TAG main
   )
-  FetchContent_MakeAvailable(libOS-api)
+  FetchContent_MakeAvailable(libOS)
 endif()
 
 set(LIB_SRCS
