@@ -15,7 +15,7 @@
 
 libos_err_t libos_mutex_lock(libos_mutex_handle_t handle, libos_time_t timeout)
 {
-    LIBOS_ERR_RET_ARG_NOT_NUL(handle);
+    LIBOS_ERR_RET_ARG_NOT_NULL(handle);
     TimerTick_t ticks = libos_time_to_ticks(timeout);
 
     if (handle->is_recursive)
@@ -32,7 +32,7 @@ libos_err_t libos_mutex_lock(libos_mutex_handle_t handle, libos_time_t timeout)
 
 libos_err_t libos_mutex_unlock(libos_mutex_handle_t handle)
 {
-    LIBOS_ERR_RET_ARG_NOT_NUL(handle);
+    LIBOS_ERR_RET_ARG_NOT_NULL(handle);
 
     if (handle->is_recursive)
     {
@@ -50,7 +50,7 @@ libos_err_t libos_mutex_unlock(libos_mutex_handle_t handle)
 
 libos_err_t libos_mutex_create_dynamic(libos_mutex_handle_t *handle)
 {
-    LIBOS_ERR_RET_ARG_NOT_NUL(handle);
+    LIBOS_ERR_RET_ARG_NOT_NULL(handle);
 
     libos_mutex_handle_t new_handle = (libos_mutex_handle_t)malloc(sizeof(libos_mutex_t));
     if (new_handle == NULL)
@@ -77,7 +77,7 @@ libos_err_t libos_mutex_create_dynamic(libos_mutex_handle_t *handle)
 
 libos_err_t libos_mutex_create_recursive_dynamic(libos_mutex_handle_t *handle)
 {
-    LIBOS_ERR_RET_ARG_NOT_NUL(handle);
+    LIBOS_ERR_RET_ARG_NOT_NULL(handle);
 
     libos_mutex_handle_t new_handle = (libos_mutex_handle_t)malloc(sizeof(libos_mutex_t));
     if (new_handle == NULL)
@@ -108,8 +108,8 @@ libos_err_t libos_mutex_create_recursive_dynamic(libos_mutex_handle_t *handle)
 
 libos_err_t libos_mutex_create_static(libos_mutex_t *mutex, libos_mutex_handle_t *handle)
 {
-    LIBOS_ERR_RET_ARG_NOT_NUL(mutex);
-    LIBOS_ERR_RET_ARG_NOT_NUL(handle);
+    LIBOS_ERR_RET_ARG_NOT_NULL(mutex);
+    LIBOS_ERR_RET_ARG_NOT_NULL(handle);
 
     mutex->mutex_handle = xSemaphoreCreateMutexStatic(&(mutex->mutex));
     if (mutex->mutex_handle == NULL)
@@ -130,8 +130,8 @@ libos_err_t libos_mutex_create_static(libos_mutex_t *mutex, libos_mutex_handle_t
 
 libos_err_t libos_mutex_create_recursive_static(libos_mutex_t *mutex, libos_mutex_handle_t *handle)
 {
-    LIBOS_ERR_RET_ARG_NOT_NUL(mutex);
-    LIBOS_ERR_RET_ARG_NOT_NUL(handle);
+    LIBOS_ERR_RET_ARG_NOT_NULL(mutex);
+    LIBOS_ERR_RET_ARG_NOT_NULL(handle);
 
     mutex->mutex_handle = xSemaphoreCreateRecursiveMutexStatic(&(mutex->mutex));
     if (mutex->mutex_handle == NULL)
