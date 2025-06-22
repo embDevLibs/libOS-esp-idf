@@ -57,7 +57,7 @@ typedef struct {
      * @brief Handle to the actual mutex.
      * 
      */
-    xSemaphoreHandle mutex_handle;
+    SemaphoreHandle_t mutex_handle;
 
     /**
      * @brief Is this mutex statically allocated or dynamically from the heap.

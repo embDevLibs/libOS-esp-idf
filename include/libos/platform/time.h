@@ -89,9 +89,9 @@ typedef int_least64_t libos_time_nanoseconds_t;
  * 
  * @param[in] time The time to convert to FreeRTOS ticks.
  * 
- * @return TimerTick_t The resulting number of FreeRTOS ticks that represent the time period.
+ * @return TickType_t The resulting number of FreeRTOS ticks that represent the time period.
  */
-TimerTick_t libos_time_to_ticks(libos_time_t time);
+TickType_t libos_time_to_ticks(libos_time_t time);
 
 #ifdef __cplusplus
 } // extern "C"

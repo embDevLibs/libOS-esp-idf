@@ -18,18 +18,22 @@
  * 
  */
 
-#include <time.h>
 #include <stdint.h>
 
+#if LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#else // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 #include <FreeRTOS.h>
 #include <task.h>
+#endif // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 
 #include "libos/time.h"
 
 #define MIN_VAL INT_LEAST64_MIN
 #define MAX_VAL INT_LEAST64_MAX
 
-const libos_time_t overflow_maximum = ((TimerTick_t)0 - 1);
+const libos_time_t overflow_maximum = ((TickType_t)0 - 1);
 const libos_time_nanoseconds_t per_tick = ((libos_time_nanoseconds_t)1000 * 1000 * 1000) / configTICK_RATE_HZ;
 
 libos_time_t libos_time_get_now(void)
@@ -37,13 +41,13 @@ libos_time_t libos_time_get_now(void)
     return (xTaskGetTickCount() * per_tick) % overflow_maximum;
 }
 
-TimerTick_t libos_time_to_ticks(libos_time_t time)
+TickType_t libos_time_to_ticks(libos_time_t time)
 {
     if (time < 0)
     {
         return 0;
     }
-    return (TimerTick_t)(time / per_tick);
+    return (TickType_t)(time / per_tick);
 }
 
 libos_time_nanoseconds_t libos_time_difference_ns(libos_time_t a, libos_time_t b)

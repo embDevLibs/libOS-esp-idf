@@ -16,7 +16,7 @@
 libos_err_t libos_mutex_lock(libos_mutex_handle_t handle, libos_time_t timeout)
 {
     LIBOS_ERR_RET_ARG_NOT_NULL(handle);
-    TimerTick_t ticks = libos_time_to_ticks(timeout);
+    TickType_t ticks = libos_time_to_ticks(timeout);
 
     if (handle->is_recursive)
     {
