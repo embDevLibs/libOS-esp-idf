@@ -5,6 +5,7 @@ set(C_STANDARD 99)
 
 option(LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE "Is FreeRTOS in a subdir of the include path?" OFF)
 option(LIBOS_FREERTOS_TARGET_NAME "What is the CMake Target name of FreeRTOS to also receive those header files." "freertos_kernel")
+option(LIBOS_FREERTOS_NO_COMMON "Don't create the common libOS target name that includes both platform and api." OFF)
 
 if(NOT TARGET libOS-api) # Prevent multiple instances if other libraries already provide the libos library
   include(FetchContent)
@@ -30,13 +31,16 @@ if (NOT ${LIBOS_FREERTOS_TARGET_NAME} STREQUAL "")
   target_link_libraries(libOS-platform PUBLIC ${LIBOS_FREERTOS_TARGET_NAME})
 endif()
 
-add_library(libOS INTERFACE)
-
-target_link_libraries(libOS INTERFACE libOS-platform)
-target_link_libraries(libOS INTERFACE libOS-api)
-
 if(${LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE})
     target_compile_definitions(libOS-platform PUBLIC LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE=1)
 else()
     target_compile_definitions(libOS-platform PUBLIC LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE=0)
+endif()
+
+if (NOT ${LIBOS_FREERTOS_NO_COMMON})
+  add_library(libOS INTERFACE)
+
+  target_link_libraries(libOS INTERFACE libOS-platform)
+  target_link_libraries(libOS INTERFACE libOS-api)
+
 endif()
