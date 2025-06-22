@@ -24,8 +24,11 @@ set(LIB_SRCS
 
 add_library(libOS-platform STATIC "${LIB_SRCS}")
 target_include_directories(libOS-platform PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(libOS-platform PUBLIC ${LIBOS_FREERTOS_TARGET_NAME})
+
 target_link_libraries(libOS-platform PUBLIC libOS-api)
+if (NOT ${LIBOS_FREERTOS_TARGET_NAME} STREQUAL "")
+  target_link_libraries(libOS-platform PUBLIC ${LIBOS_FREERTOS_TARGET_NAME})
+endif()
 
 add_library(libOS INTERFACE)
 
