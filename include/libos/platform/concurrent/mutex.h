@@ -3,7 +3,7 @@
  * @brief Implementation of the mutex API for libOS
  *
  * @details
- * This implements the interface defined in libos/concurrency/mutex.h. It is
+ * This implements the interface defined in libos/concurrent/mutex.h. It is
  * implemented using the C11 stdlib interface for mutexes. This supports all
  * the features also found in libos (and more but those not used).
  */

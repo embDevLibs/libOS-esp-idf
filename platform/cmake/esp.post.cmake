@@ -1,9 +1,9 @@
 set(LIB_SRCS
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/concurrency/mutex.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/concurrent/mutex.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/error.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/log.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/time.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/concurrency/mutex.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/concurrent/mutex.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/time.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/log.c"
 )

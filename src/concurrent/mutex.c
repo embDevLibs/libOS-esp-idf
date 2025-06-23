@@ -11,7 +11,7 @@
 #endif // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 
 #include "libos/error.h"
-#include "libos/concurrency/mutex.h"
+#include "libos/concurrent/mutex.h"
 
 libos_err_t libos_mutex_lock(libos_mutex_handle_t handle, libos_time_t timeout)
 {
