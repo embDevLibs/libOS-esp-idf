@@ -10,7 +10,7 @@ set(LIB_SRCS
 
 idf_component_register(SRCS ${LIB_SRCS}
                        INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
-                       REQUIRES libOS freertos)
+                       REQUIRES libos freertos)
 
 # Just in case plain cmake is used somewhere else, give it an alias for the 'regular' name.
 add_library(libOS-freertos ALIAS ${COMPONENT_LIB})
