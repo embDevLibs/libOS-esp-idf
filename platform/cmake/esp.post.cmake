@@ -1,0 +1,19 @@
+set(LIB_SRCS
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/concurrency/mutex.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/error.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/log.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/libos/platform/time.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/concurrency/mutex.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/time.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/log.c"
+)
+
+idf_component_register(SRCS ${LIB_SRCS}
+                       INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include"
+                       REQUIRES libOS freertos)
+
+# Just in case plain cmake is used somewhere else, give it an alias for the 'regular' name.
+add_library(libOS-freertos ALIAS ${COMPONENT_LIB})
+
+# This is given in the ESP-IDF platform.
+target_compile_definitions(${COMPONENT_LIB} PUBLIC LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE=1)
