@@ -2,3 +2,6 @@ version: "0.0.1"
 description: "Implementation of the libOS APIs using the FreeRTOS platform."
 url: "https://github.com/embDevLibs/libOS-freertos"
 license: "MIT"
+dependency:
+  gwillemsen/libos:
+    version: 0.0.1
