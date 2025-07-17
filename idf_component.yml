@@ -4,4 +4,4 @@ url: "https://github.com/embDevLibs/libOS-freertos"
 license: "MIT"
 dependencies:
   gwillemsen/libos:
-    version: 0.0.2
+    version: 0.0.4
