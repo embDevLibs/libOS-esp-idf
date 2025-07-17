@@ -3,14 +3,14 @@ option(LIBOS_FREERTOS_TARGET_NAME "What is the CMake Target name of FreeRTOS to 
 
 set(C_STANDARD 99)
 
-if(NOT TARGET libOS) # Prevent multiple instances if other libraries already provide the libos library
+if(NOT TARGET libos) # Prevent multiple instances if other libraries already provide the libos library
   include(FetchContent)
   FetchContent_Declare(
-    libOS
+    libos
     GIT_REPOSITORY git@github.com:embDevLibs/libos.git
     GIT_TAG main
   )
-  FetchContent_MakeAvailable(libOS)
+  FetchContent_MakeAvailable(libos)
 endif()
 
 set(LIB_SRCS
@@ -26,7 +26,7 @@ set(LIB_SRCS
 add_library(${PROJECT_NAME} STATIC "${LIB_SRCS}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-target_link_libraries(${PROJECT_NAME} PUBLIC libOS)
+target_link_libraries(${PROJECT_NAME} PUBLIC libos)
 
 if (NOT "${LIBOS_FREERTOS_TARGET_NAME}" STREQUAL "")
   target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBOS_FREERTOS_TARGET_NAME})

@@ -11,7 +11,7 @@ else()
 endif()
 
 if (${LIBOS_FREERTOS_PROJECT})
-    project(libOS-freertos)
+    project(libos-freertos)
 endif()
 
 #
