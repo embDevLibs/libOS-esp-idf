@@ -6,16 +6,13 @@
  * This header file implements the interface described in libOS/error.h. It
  * provides the macro definition for several error codes and also defines a
  * typedef for the 'type' of the error value itself.
- * Because this is the standard library implementation the error value is
- * just `int`, success is 0, and the error codes map to a E<type> macro.
- * Except LIBOS_ERR_FAIL and LIBOS_ERR_INVALID_STATE.
- * 
- * LIBOS_ERR_FAIL evaluates to -1 as there no such equivalent in the errno
- * header. The standard defines the errno macros to be positive integers so
- * assigning a negative integer should be safe.
- * 
- * LIBOS_ERR_INVALID_STATE is defined to -2 for the same reason as
- * LIBOS_ERR_FAIL.
+ * This is based on the ESP-IDF header `esp_err.h`. Most error codes are taken
+ * from there. There are exceptions, and they are taken from either the POSIX
+ * header errno, or a made up value that doesn't conflict with existing values.
+ *
+ * Exception(s):
+ * - LIBOS_ERR_BUSY (POSIX value)
+ *
  */
 
 #pragma once
@@ -23,6 +20,7 @@
 #define LIBOS_PLATFORM_ERROR_H
 
 #include <errno.h>
+#include "esp_err.h"
 
 // Error codes
 
@@ -30,43 +28,43 @@
  * @brief All OK
  * 
  */
-#define LIBOS_ERR_OK ((libos_err_t)0)
+#define LIBOS_ERR_OK ((libos_err_t)ESP_OK)
 
 /**
  * @brief General purpose/unkown failure
  * 
  */
-#define LIBOS_ERR_FAIL ((libos_err_t)-1)
+#define LIBOS_ERR_FAIL ((libos_err_t)ESP_FAIL)
 
 /**
  * @brief Could not allocate the memory required for the request.
  * 
  */
-#define LIBOS_ERR_NO_MEM ((libos_err_t)ENOMEM)
+#define LIBOS_ERR_NO_MEM ((libos_err_t)ESP_ERR_NO_MEM)
 
 /**
  * @brief A invalid argument was given to the function.
  * 
  */
-#define LIBOS_ERR_INVALID_ARG ((libos_err_t)EINVAL)
+#define LIBOS_ERR_INVALID_ARG ((libos_err_t)ESP_ERR_INVALID_ARG)
 
 /**
  * @brief The function does not support being used (as in never, if data is invalid state, use either LIBOS_ERR_INVALID_ARG, or LIBOS_ERR_INVALID_STATE).
  * 
  */
-#define LIBOS_ERR_NOTSUP ((libos_err_t)ENOTSUP)
+#define LIBOS_ERR_NOTSUP ((libos_err_t)ESP_ERR_NOT_SUPPORTED)
 
 /**
  * @brief The resource was busy.
  * 
  */
-#define LIBOS_ERR_BUSY ((libos_err_t)EBUSY)
+#define LIBOS_ERR_BUSY ((libos_err_t)EBUSY) // POSIX value
 
 /**
  * @brief The operation took too long and was cancelled as the timeout elapsed.
  * 
  */
-#define LIBOS_ERR_TIMEOUT ((libos_err_t)ETIMEDOUT)
+#define LIBOS_ERR_TIMEOUT ((libos_err_t)ESP_ERR_TIMEOUT)
 
 // Non POSIX standard error codes
 // POSIX requires error codes to be positive anyway, and -1 is often general purpose 'error'.
@@ -75,7 +73,7 @@
  * @brief The function normally supports the operation but the data that is being worked (usually a object of some sorts) is in a invalid state for this operation (but itself might still be valid).
  * 
  */
-#define LIBOS_ERR_INVALID_STATE ((libos_err_t)-2)
+#define LIBOS_ERR_INVALID_STATE ((libos_err_t)ESP_ERR_INVALID_STATE)
 
 #ifdef __cplusplus
 extern "C" {
@@ -83,7 +81,7 @@ extern "C" {
 
 // Error type
 
-typedef int libos_err_t;
+typedef esp_err_t libos_err_t;
 
 #ifdef __cplusplus
 } // extern "C"

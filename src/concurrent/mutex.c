@@ -1,22 +1,17 @@
-#include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-#if LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
-#else // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
-#include <FreeRTOS.h>
-#include <semphr.h>
-#endif // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 
 #include "libos/error.h"
+#include "libos/time.h"
 #include "libos/concurrent/mutex.h"
 
 libos_err_t libos_mutex_lock(libos_mutex_handle_t handle, libos_time_t timeout)
 {
     LIBOS_ERR_RET_ARG_NOT_NULL(handle);
-    TickType_t ticks = libos_time_to_ticks(timeout);
+    TickType_t ticks = pdMS_TO_TICKS(libos_time_to_ms(timeout));
 
     if (handle->is_recursive)
     {

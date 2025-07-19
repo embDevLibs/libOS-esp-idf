@@ -12,7 +12,6 @@
 #ifndef LIBOS_PLATFORM_CONCURRENT_MUTEX_H
 #define LIBOS_PLATFORM_CONCURRENT_MUTEX_H
 
-#include <stdint.h>
 #include <stdbool.h>
 
 #ifndef LIBOS_MUTEX_ENABLE_STATIC_ALLOCATION
@@ -27,13 +26,8 @@
 #define LIBOS_MUTEX_ENABLE_RECURSIVE configUSE_RECURSIVE_MUTEXES
 #endif // LIBOS_MUTEX_ENABLE_RECURSIVE
 
-#if LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
-#else // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
-#include <FreeRTOS.h>
-#include <semphr.h>
-#endif // LIBOS_FREERTOS_SUBDIR_FOR_INCLUDE==1
 
 #ifdef __cplusplus
 extern "C" {

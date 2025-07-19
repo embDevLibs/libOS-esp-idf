@@ -1,2 +1,0 @@
-set(LIBOS_FREERTOS_PROJECT ON)
-set(LIBOS_FREERTOS_POST_INCLUDE "generic.post.cmake")
