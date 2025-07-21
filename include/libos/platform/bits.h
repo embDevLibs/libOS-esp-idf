@@ -1,4 +1,4 @@
-// IWYU pragma: private, include "libos/bits.h"
+// IWYU pragma: private; include "libos/bits.h"
 
 #pragma once
 

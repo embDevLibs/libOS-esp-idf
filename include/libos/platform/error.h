@@ -15,6 +15,8 @@
  *
  */
 
+// IWYU pragma: private; include "libos/error.h"
+
 #pragma once
 #ifndef LIBOS_PLATFORM_ERROR_H
 #define LIBOS_PLATFORM_ERROR_H

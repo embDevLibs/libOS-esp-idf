@@ -18,6 +18,8 @@
  *
  */
 
+// IWYU pragma: private; include "libos/log.h"
+
 #pragma once
 #include "esp_log_level.h"
 #ifndef LIBOS_PLATFORM_LOG_H

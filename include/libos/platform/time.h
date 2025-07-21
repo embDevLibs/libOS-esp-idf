@@ -22,6 +22,8 @@
  * 
  */
 
+// IWYU pragma: private; include "libos/time.h"
+
 #pragma once
 #ifndef LIBOS_PLATFORM_TIME_H
 #define LIBOS_PLATFORM_TIME_H

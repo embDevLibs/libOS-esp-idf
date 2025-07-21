@@ -8,6 +8,8 @@
  * the features also found in libos (and more but those not used).
  */
 
+// IWYU pragma: private; include "libos/mutex.h"
+
 #pragma once
 #ifndef LIBOS_PLATFORM_CONCURRENT_MUTEX_H
 #define LIBOS_PLATFORM_CONCURRENT_MUTEX_H
